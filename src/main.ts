@@ -15,6 +15,8 @@ initTWD(import.meta.glob('./twd-tests/**/*.twd.test.ts'), {
   open: window.matchMedia('(min-width: 1024px)').matches,
   position: 'left',
   pace: true,
+  // Chapter 5 has the reader filter the sidebar down to the shop's tests
+  search: true,
 })
 
 // Start following runs right away, so a Run All pressed on any chapter counts

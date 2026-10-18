@@ -27,7 +27,7 @@ const fillCheckout = async (details: { name: string; email: string; card: string
   await user.click(await screenDom.findByRole('button', { name: 'Place order' }))
 }
 
-describe('Chapter 5 · The shop', () => {
+describe('Chapter 5 · Bean & Leaf shop', () => {
   beforeEach(() => {
     twd.clearRequestMockRules()
   })

@@ -1,6 +1,50 @@
 <script setup lang="ts">
+import { computed, watch } from 'vue'
 import FeatureVideo from '@/components/FeatureVideo.vue'
+import TourCard, { type TourStep } from '@/components/TourCard.vue'
 import { links } from '@/links'
+import { useTwdSuite } from '@/composables/useTwdSuite'
+import { useTwdFilter } from '@/composables/useTwdFilter'
+import { useSpotlight } from '@/composables/useSpotlight'
+
+const { suite, lastRun } = useTwdSuite()
+const { filter } = useTwdFilter()
+
+// A run that touched every test is a Run All; a single ▶ or a filtered run doesn't count
+const ranEverything = computed(
+  () => !!lastRun.value && suite.value.total > 0 && lastRun.value.tests >= suite.value.total,
+)
+const allGreen = computed(() => ranEverything.value && lastRun.value!.failed === 0)
+const filtered = computed(() => filter.value.trim() !== '')
+
+useSpotlight(() => {
+  if (suite.value.running || allGreen.value) return null
+  return filtered.value ? '#twd-search-input' : '.twd-sidebar-header-buttons .twd-btn-primary'
+})
+
+const steps = computed<TourStep[]>(() => [
+  {
+    text: 'Clear the <strong>Filter tests</strong> box in the sidebar, so every test shows again.',
+    state: filtered.value && !ranEverything.value ? 'active' : 'done',
+  },
+  {
+    text: 'Press <strong>Run All</strong>. The page runs through every chapter and the shop, then comes back here.',
+    state: allGreen.value ? 'done' : filtered.value ? 'todo' : 'active',
+  },
+])
+
+const tone = computed(() => {
+  if (suite.value.running) return 'info'
+  if (ranEverything.value) return allGreen.value ? 'success' : 'error'
+  return undefined
+})
+
+const seconds = computed(() => (lastRun.value ? (lastRun.value.duration / 1000).toFixed(1) : ''))
+
+// The tests' clicks scroll the page; bring the result back into view when they finish
+watch(lastRun, (run) => {
+  if (run && run.tests >= suite.value.total) window.scrollTo({ top: 0, behavior: 'smooth' })
+})
 
 const skills = [
   {
@@ -34,12 +78,34 @@ const skills = [
   <article class="chapter">
     <header class="chapter-head">
       <p class="eyebrow">Chapter 6</p>
-      <h1>The tests you ran are the real ones</h1>
+      <h1>Run it all</h1>
       <p class="lede">
-        Nothing on this site is a mock-up of TWD. The tests in the sidebar are the ones that guard
-        this site's own pull requests, and the receipts are public.
+        You've run the tests one chapter at a time. Now all of them in one go: every chapter, the
+        shop, and back here.
       </p>
     </header>
+
+    <div class="finale-run">
+      <TourCard :steps="steps" :unlocked="allGreen" :tone="tone">
+        <template v-if="suite.running">
+          {{ suite.passed }} of {{ suite.total }} passed so far…
+        </template>
+        <template v-else-if="allGreen">
+          <strong>{{ suite.total }} tests, {{ seconds }}s, 0 failures.</strong> That's the whole
+          tour, start to finish: typed, clicked, slowed down, mocked and checked.
+        </template>
+        <template v-else-if="ranEverything">
+          {{ lastRun!.failed }} failed. Click a red test in the sidebar to see why, then press Run
+          All again.
+        </template>
+      </TourCard>
+    </div>
+
+    <h2 class="section-title">The tests you ran are the real ones</h2>
+    <p class="section-lede">
+      Nothing on this site is a mock-up of TWD. The tests in the sidebar are the ones that guard
+      this site's own pull requests, and the receipts are public.
+    </p>
 
     <ul class="proof">
       <li>

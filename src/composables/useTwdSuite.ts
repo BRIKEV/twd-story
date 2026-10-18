@@ -11,6 +11,8 @@ export interface SuiteSnapshot {
 export interface CompletedRun {
   /** How many distinct tests ran: equal to the total for a Run All. */
   tests: number
+  /** Which ones, so a page can check a run covered its own suite. */
+  ids: Set<string>
   duration: number
   passed: number
   failed: number
@@ -77,6 +79,7 @@ const tick = () => {
     if (now - run.idleSince >= SETTLE_MS) {
       run.last = {
         tests: run.seen.size,
+        ids: new Set(run.seen),
         duration: run.idleSince - run.startedAt,
         passed: snapshot.passed,
         failed: snapshot.failed,
@@ -106,4 +109,21 @@ export function useTwdSuite() {
     requestAnimationFrame(tick)
   }
   return { suite, lastRun }
+}
+
+/** Ids of every test inside the top-level describe with this name. */
+export function testIdsIn(suiteName: string): string[] {
+  const suite = [...handlers.values()].find(
+    (handler) => handler.type === 'suite' && !handler.parent && handler.name === suiteName,
+  )
+  if (!suite) return []
+  const ids: string[] = []
+  const walk = (id: string) => {
+    const handler = handlers.get(id)
+    if (!handler) return
+    if (handler.type === 'test') ids.push(handler.id)
+    handler.children?.forEach(walk)
+  }
+  suite.children?.forEach(walk)
+  return ids
 }

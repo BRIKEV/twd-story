@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
 import ChapterNav from './components/ChapterNav.vue'
+
+const route = useRoute()
 </script>
 
 <template>
-  <div class="shell">
+  <RouterView v-if="route.meta.standalone" />
+  <div v-else class="shell">
     <ChapterNav />
     <main class="page">
       <RouterView />

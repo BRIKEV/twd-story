@@ -32,9 +32,11 @@ TWD exposes no run events, but its runner state lives on
 `window.__TWD_STATE__`, and the composables poll it on animation frames:
 
 - `useTwdTest(name)` follows one test by name (chapters 1–4).
-- `useTwdSuite()` follows every test, for the Run All in chapter 5. It runs one
-  loop for the life of the page, started in `main.ts`, because Run All spends
-  most of its time on other chapters while the shop page is not mounted.
+- `useTwdSuite()` follows every test and records which ones each run covered:
+  chapter 5 checks a run covered the shop suite, chapter 6 that it covered all.
+  It runs one loop for the life of the page, started in `main.ts`, because Run
+  All spends most of its time on pages that aren't the one following it.
+- `useTwdFilter()` reads the sidebar's Filter tests box (`search: true`).
 - `useTwdPace()` reads the Speed selector.
 - `useSpotlight()` pulses, and scrolls to, the sidebar element the reader
   should click next.
@@ -54,15 +56,21 @@ or 402 is treated as the server talking.
 
 ## Chapters
 
-| #   | Route         | What the reader does                                                                  |
-| --- | ------------- | ------------------------------------------------------------------------------------- |
-| 0   | `/`           | Meets the sidebar                                                                     |
-| 1   | `/first-test` | Runs one test that types "hello" into a list                                          |
-| 2   | `/speed`      | Sets Speed to Slow and watches a longer test                                          |
-| 3   | `/automate`   | Replays chapters 1–2 at full speed; then twd-cli, recording, relay                    |
-| 4   | `/mocking`    | Runs mocked API scenarios: list, empty, 500, recovery, slow, POST (3 unlock the next) |
-| 5   | `/shop`       | Presses Run All: every chapter plus 13 shop tests                                     |
-| 6   | `/ship`       | Proof (CI, recordings, test files), twd-ai skills, install                            |
+| #   | Route         | What the reader does                                                                    |
+| --- | ------------- | --------------------------------------------------------------------------------------- |
+| 0   | `/`           | Meets the sidebar                                                                       |
+| 1   | `/first-test` | Runs one test that types "hello" into a list                                            |
+| 2   | `/speed`      | Sets Speed to Slow and watches a longer test                                            |
+| 3   | `/automate`   | Replays chapters 1–2 at full speed; then twd-cli, recording, relay                      |
+| 4   | `/mocking`    | Runs mocked API scenarios: list, empty, 500, recovery, slow, POST (3 unlock the next)   |
+| 5   | `/real-app`   | Opens Bean & Leaf (`/shop`), runs one test, filters the sidebar to `shop`, Run Filtered |
+| 6   | `/ship`       | Clears the filter and presses Run All; proof, twd-ai skills, install                    |
+
+`/shop` is outside the tour on purpose: no chapter menu, its own look, and a
+floating tour card (`ShopTour.vue`). It finds its tests through the top-level
+describe name `Chapter 5 · Bean & Leaf shop` (`SHOP_SUITE` in
+`useShopRun.ts`). The last test file, `06-finale`, visits `/ship`, so a Run All
+ends where chapter 6 asked for it.
 
 The links in chapter 6 live in `src/links.ts` and assume the repo is
 `BRIKEV/twd-story`. The chapter 3 terminal shows real `pnpm test:ci` output;

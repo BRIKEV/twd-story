@@ -13,7 +13,14 @@ const router = createRouter({
     { path: '/speed', name: 'speed', component: () => import('./views/SpeedView.vue') },
     { path: '/automate', name: 'automate', component: () => import('./views/AutomateView.vue') },
     { path: '/mocking', name: 'mocking', component: () => import('./views/MockingView.vue') },
-    { path: '/shop', name: 'shop', component: () => import('./views/ShopView.vue') },
+    { path: '/real-app', name: 'real-app', component: () => import('./views/RealAppView.vue') },
+    // The app chapter 5 tests: a site of its own, outside the tutorial's chrome
+    {
+      path: '/shop',
+      name: 'shop',
+      component: () => import('./views/ShopView.vue'),
+      meta: { standalone: true },
+    },
     { path: '/ship', name: 'ship', component: () => import('./views/ShipView.vue') },
     // Also catches the throwaway route twd.visit() passes through to remount a page
     {

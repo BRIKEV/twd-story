@@ -35,15 +35,10 @@ defineProps<{
       </div>
     </div>
     <template v-if="next">
-      <RouterLink v-if="unlocked && next.ready" :to="next.path" class="button primary">
+      <RouterLink v-if="unlocked" :to="next.path" class="button primary">
         Chapter {{ next.number }}: {{ next.title }} →
       </RouterLink>
-      <span v-else-if="unlocked" class="button disabled">
-        Chapter {{ next.number }}: {{ next.title }} — coming soon
-      </span>
-      <RouterLink v-else :to="next.path" class="skip-link" :class="{ hidden: !next.ready }">
-        Skip ahead
-      </RouterLink>
+      <RouterLink v-else :to="next.path" class="skip-link">Skip ahead</RouterLink>
     </template>
   </aside>
 </template>

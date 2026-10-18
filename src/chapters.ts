@@ -2,21 +2,28 @@ export interface Chapter {
   number: number
   path: string
   title: string
-  /** Chapters not built yet still show in the nav, so the arc is visible. */
-  ready: boolean
 }
 
 export const chapters: Chapter[] = [
-  { number: 0, path: '/', title: 'Meet TWD', ready: true },
-  { number: 1, path: '/first-test', title: 'Your first test', ready: true },
-  { number: 2, path: '/speed', title: 'Too fast?', ready: true },
-  { number: 3, path: '/automate', title: 'Automate it', ready: true },
-  { number: 4, path: '/mocking', title: 'No backend? Mock it', ready: true },
-  { number: 5, path: '/shop', title: 'Run everything', ready: true },
-  { number: 6, path: '/ship', title: 'Proof & tooling', ready: true },
+  { number: 0, path: '/', title: 'Meet TWD' },
+  { number: 1, path: '/first-test', title: 'Your first test' },
+  { number: 2, path: '/speed', title: 'Too fast?' },
+  { number: 3, path: '/automate', title: 'Automate it' },
+  { number: 4, path: '/mocking', title: 'No backend? Mock it' },
+  { number: 5, path: '/real-app', title: 'Test a real app' },
+  { number: 6, path: '/ship', title: 'Run it all' },
 ]
+
+export const LAST_CHAPTER = chapters.length - 1
+
+export const chapterAt = (path: string) => chapters.find((chapter) => chapter.path === path)
 
 export const chapterAfter = (path: string) => {
   const index = chapters.findIndex((chapter) => chapter.path === path)
   return chapters[index + 1]
+}
+
+export const chapterBefore = (path: string) => {
+  const index = chapters.findIndex((chapter) => chapter.path === path)
+  return index > 0 ? chapters[index - 1] : undefined
 }
