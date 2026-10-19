@@ -78,6 +78,6 @@ update it when the test count changes.
 
 ## CI
 
-- `twd-tests.yml`: `vp check`, then every test headless with coverage; the
-  report and the coverage table go to the job summary.
+- `twd-tests.yml`: `vp check`, then every test headless with coverage. The TWD
+  report goes to the job summary and the coverage table to the step log.
 - `twd-record.yml`: label a PR `record` to get a video of the tests it added.

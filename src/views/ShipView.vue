@@ -112,8 +112,7 @@ const skills = [
         <a :href="links.ciRuns" target="_blank" rel="noopener">
           <strong>CI runs ↗</strong>
           <span
-            >Every push runs all of them headless with twd-cli. Coverage is in the job
-            summary.</span
+            >Every push runs all of them headless with twd-cli, then prints the code coverage.</span
           >
         </a>
       </li>

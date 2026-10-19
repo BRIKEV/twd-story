@@ -63,11 +63,5 @@ jobs:
           name: twd-report
           path: .twd/report
 
-      # The full table stays in the log; the job summary gets the readable version.
-      # Chapter 6 of the site links to this summary.
-      - name: Coverage
-        if: always()
-        run: |
-          vp run collect:coverage:text
-          vp run collect:coverage:json
-          node scripts/coverage-summary.mjs >> "$GITHUB_STEP_SUMMARY"
+      - name: Display coverage
+        run: vp run collect:coverage:text
