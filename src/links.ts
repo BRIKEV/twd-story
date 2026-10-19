@@ -7,7 +7,9 @@ export const links = {
   tests: `${REPO}/tree/main/src/twd-tests`,
   ciRuns: `${REPO}/actions/workflows/twd-tests.yml`,
   recordWorkflow: `${REPO}/blob/main/.github/workflows/twd-record.yml`,
-  recordedPrs: `${REPO}/pulls?q=is%3Apr+label%3Arecord`,
+  // The record workflow drops the label once it has recorded, so a label search
+  // would come back empty: link the PR that was recorded instead.
+  recordedPr: `${REPO}/pull/1`,
   docs: 'https://twd.dev',
   docsMocking: 'https://twd.dev/api-mocking',
   docsRecording: 'https://twd.dev/recording',
