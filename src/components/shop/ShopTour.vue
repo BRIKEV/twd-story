@@ -14,8 +14,7 @@ const { filter } = useTwdFilter()
 const { suite, shopIds, shopRun } = useShopRun()
 
 const next = chapterAfter('/real-app')!
-// On a phone the card would cover half the shop, so it starts folded there
-const collapsed = ref(!window.matchMedia('(min-width: 1024px)').matches)
+const collapsed = ref(false)
 
 const firstDone = computed(() => firstStatus.value === 'pass' || !!shopRun.value)
 const filtered = computed(() => filter.value.trim().toLowerCase().includes('shop'))

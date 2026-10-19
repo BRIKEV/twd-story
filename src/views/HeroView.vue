@@ -15,9 +15,10 @@ import { RouterLink } from 'vue-router'
       <RouterLink to="/first-test" class="button primary large">Start the tour →</RouterLink>
       <code class="install">npm i -D twd-js</code>
     </div>
-    <p class="mobile-note">
-      The tour is best on a laptop: on a small screen there's no room for the sidebar and the page
-      side by side.
+    <p class="dev-only-note">
+      In your own app the sidebar only exists while you develop: nothing of TWD ships in your
+      production build. This site is the exception, on purpose, because here the sidebar is the
+      demo.
     </p>
 
     <ul class="facts">

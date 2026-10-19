@@ -161,6 +161,10 @@ npx twd-js init public</code></pre>
         Works with React, Vue, Angular, Solid, Astro, Nuxt, HTMX and vanilla JS, on Vite, Webpack or
         a CDN.
       </p>
+      <p>
+        Development only: the sidebar and your tests stay out of your production build. This site
+        ships them on purpose.
+      </p>
       <div class="hero-actions">
         <a class="button primary large" :href="links.docs" target="_blank" rel="noopener">
           Read the docs →
