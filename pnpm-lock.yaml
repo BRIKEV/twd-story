@@ -182,8 +182,8 @@ importers:
         specifier: ^4.0.3
         version: 4.1.0(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3))
       twd-js:
-        specifier: ^1.11.0
-        version: 1.11.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: ^1.12.0
+        version: 1.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       vue:
         specifier: ^3.5.42
         version: 3.5.44(typescript@6.0.3)
@@ -210,8 +210,8 @@ importers:
         specifier: ^18.0.0
         version: 18.0.0(supports-color@7.2.0)
       twd-cli:
-        specifier: ^1.10.0
-        version: 1.10.0(@types/json-schema@7.0.15)
+        specifier: ^1.11.0
+        version: 1.11.0(@types/json-schema@7.0.15)
       twd-lint:
         specifier: ^1.0.0
         version: 1.0.0(supports-color@7.2.0)(typescript@6.0.3)
@@ -2163,13 +2163,13 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4'
 
-  twd-cli@1.10.0:
-    resolution: {integrity: sha512-sbqi9EG/t0xNDihU4rOE2LnkqmmxDKmdot1x+aY0aH+uUA6QGQXtGk88drNGc8Ri0jljmDpf9MyCT420fRmW5Q==}
+  twd-cli@1.11.0:
+    resolution: {integrity: sha512-vVFsP1mIDTB738KXeAhgARW4hUztJAQvlycfAlKo/ceZ46HoYgz8jKofUH2JvRQYigwC7YIXIsw7rnBJhFwndQ==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  twd-js@1.11.0:
-    resolution: {integrity: sha512-0GnHtLlpU6Ho6MoI523KadjNd5VUlcTKXEd6fW2ZB3QMBv6dw8kWStNgLxnArPbmfg2Kv44EkdEiIaydBWdaBQ==}
+  twd-js@1.12.0:
+    resolution: {integrity: sha512-NSTMfTor8STQ4k2yEutRwfGODn2ZNwsN6BYniaepynWS/2zKLXsTySgc+eEbdsPURzshi22n7Ey/sW9vd4NUFg==}
     engines: {node: '>=20'}
     hasBin: true
     peerDependencies:
@@ -4187,7 +4187,7 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  twd-cli@1.10.0(@types/json-schema@7.0.15):
+  twd-cli@1.11.0(@types/json-schema@7.0.15):
     dependencies:
       istanbul-lib-coverage: 3.2.2
       openapi-mock-validator: 0.3.0(@types/json-schema@7.0.15)
@@ -4199,7 +4199,7 @@ snapshots:
       - utf-8-validate
       - yauzl
 
-  twd-js@1.11.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  twd-js@1.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
       '@testing-library/dom': 10.4.2
       '@testing-library/user-event': 14.6.8(@testing-library/dom@10.4.2)

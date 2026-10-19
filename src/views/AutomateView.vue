@@ -52,7 +52,7 @@ const ciOutput = [
   '',
   '--- Run complete ---',
   '  Passed: 23 | Failed: 0 | Skipped: 0',
-  '  Duration: 8.9s',
+  '  Duration: 6.3s',
   '',
   '  Report: .twd/report/index.html',
 ]

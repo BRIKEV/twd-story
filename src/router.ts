@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HeroView from './views/HeroView.vue'
+import NotFoundView from './views/NotFoundView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,12 +23,10 @@ const router = createRouter({
       meta: { standalone: true },
     },
     { path: '/ship', name: 'ship', component: () => import('./views/ShipView.vue') },
-    // Also catches the throwaway route twd.visit() passes through to remount a page
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'not-found',
-      component: () => import('./views/NotFoundView.vue'),
-    },
+    // Also catches the throwaway route twd.visit() passes through to remount a page.
+    // Not lazy: twd.visit() moves on after 10ms, and a chunk still loading then
+    // cancels the detour, so the page never remounts and keeps the last test's data.
+    { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundView },
   ],
 })
 
