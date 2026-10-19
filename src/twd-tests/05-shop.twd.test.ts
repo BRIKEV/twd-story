@@ -204,4 +204,57 @@ describe('Chapter 5 · Bean & Leaf shop', () => {
       await screenDom.findByLabelText('Cart: 2 items')
     })
   })
+
+  describe('Journeys', () => {
+    it('buys coffee and matcha with a discount code', async () => {
+      await twd.mockRequest('checkDiscount', {
+        method: 'POST',
+        url: '/api/discounts',
+        response: { code: 'TWD10', percent: 10 },
+      })
+      await twd.mockRequest('placeOrder', {
+        method: 'POST',
+        url: '/api/orders',
+        response: { id: 'ORD-2077', total: 4545 },
+        status: 201,
+      })
+      await openShop()
+      const user = userEvent.setup()
+
+      await addToCart('Coffee beans')
+      await addToCart('Matcha tin')
+      await user.click(await screenDom.findByRole('button', { name: 'One more Coffee beans' }))
+      twd.should(await screenDom.findByTestId('subtotal'), 'have.text', '€50.50')
+
+      await user.type(await screenDom.findByLabelText('Discount code'), 'TWD10')
+      await user.click(await screenDom.findByRole('button', { name: 'Apply' }))
+      // The discount comes back from the API: wait for it on screen before the total
+      await screenDom.findByText('TWD10 (−10%)')
+      twd.should(await screenDom.findByTestId('total'), 'have.text', '€45.45')
+
+      await user.click(await screenDom.findByRole('button', { name: 'Checkout' }))
+      await fillCheckout({ name: 'Ada', email: 'ada@example.com', card: '4242 4242 4242 4242' })
+
+      const rule = await twd.waitForRequest('placeOrder')
+      expect(rule.request).to.deep.equal({
+        name: 'Ada',
+        email: 'ada@example.com',
+        items: [
+          { productId: 'coffee', quantity: 2 },
+          { productId: 'matcha', quantity: 1 },
+        ],
+        discountCode: 'TWD10',
+      })
+      await screenDom.findByRole('heading', { name: 'Order ORD-2077 is on its way' })
+      await screenDom.findByText('Charged €45.45. A receipt is heading to your inbox.')
+    })
+
+    it('keeps the cart when going back from checkout', async () => {
+      await goToCheckout()
+      await userEvent.click(await screenDom.findByRole('button', { name: 'Back to cart' }))
+
+      await screenDom.findByLabelText('Cart: 2 items')
+      twd.should(await screenDom.findByTestId('total'), 'have.text', '€28.00')
+    })
+  })
 })

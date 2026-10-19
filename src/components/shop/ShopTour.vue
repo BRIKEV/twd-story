@@ -77,7 +77,7 @@ const seconds = computed(() => (shopRun.value ? (shopRun.value.duration / 1000).
         <li :class="`is-${state(3)}`">
           <span class="tour-mark" aria-hidden="true">{{ state(3) === 'done' ? '✓' : '' }}</span>
           <span>
-            Press <strong>Run Filtered</strong>: all {{ shopIds.length || 13 }} shop tests, right
+            Press <strong>Run Filtered</strong>: all {{ shopIds.length || 15 }} shop tests, right
             here.
           </span>
         </li>
