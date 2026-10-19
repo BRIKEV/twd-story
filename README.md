@@ -22,9 +22,22 @@ pnpm test:ci    # run every chapter's tests headless (needs dev:ci running)
   [manual setup](https://twd.dev/getting-started#manual-setup-for-non-vite-projects).
 - No `removeMockServiceWorker()`: the mocking chapters need `mock-sw.js` in
   `dist/`. `pnpm sw` copies it into `public/` before every dev run and build.
-- Host at a domain root (e.g. a Cloudflare Pages subdomain). `twd.visit()` and
-  the service worker URL are absolute, so a subpath deploy would break both.
-  The host must serve `index.html` for unknown paths (SPA fallback).
+- Host at a domain root (a subdomain is fine). `twd.visit()` and the service
+  worker URL are absolute, so a subpath deploy would break both. The host must
+  serve `index.html` for unknown paths (SPA fallback).
+
+## Deploy
+
+Cloudflare Workers with static assets, built from `main` by Cloudflare's Git
+integration. `wrangler.jsonc` serves `dist/` as a single-page app.
+
+| Setting        | Value                      |
+| -------------- | -------------------------- |
+| Build command  | `pnpm run build`           |
+| Deploy command | `pnpm dlx wrangler deploy` |
+
+Not `npx wrangler deploy`, Cloudflare's default: the `devEngines` pnpm pin makes
+npm refuse to run. The Worker's name must match `name` in `wrangler.jsonc`.
 
 ## How chapters follow the sidebar
 

@@ -1,0 +1,11 @@
+// Cloudflare Workers static assets: dist/ as a single-page app, no Worker code.
+// Unknown page paths get index.html (/shop, /real-app…); a fetch to /api/… gets
+// a 404, which the app shows as "No backend answered" until a test mocks it.
+{
+  "name": "twd-story",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application",
+  },
+}

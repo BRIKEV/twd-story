@@ -53,3 +53,6 @@ __screenshots__/
 
 # Copied from twd-js by `pnpm sw` before every dev run and build
 public/mock-sw.js
+
+# Local state from `wrangler dev`
+.wrangler/
