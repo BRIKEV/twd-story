@@ -24,6 +24,7 @@ const groups = [
     name: 'Checkout',
     tests: ['missing details', 'a bad email', 'a placed order', 'a declined card'],
   },
+  { name: 'Journeys', tests: ['a full purchase with a discount', 'back from checkout'] },
 ]
 </script>
 

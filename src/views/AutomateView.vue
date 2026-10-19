@@ -47,12 +47,12 @@ const seconds = computed(() =>
 // Real output of `pnpm test:ci` against this site, trimmed to the summary
 const ciOutput = [
   'Navigating to http://localhost:5173 ...',
-  'Running 23 test(s)...',
+  'Running 25 test(s)...',
   'Code coverage data written to .nyc_output/out.json',
   '',
   '--- Run complete ---',
-  '  Passed: 23 | Failed: 0 | Skipped: 0',
-  '  Duration: 6.3s',
+  '  Passed: 25 | Failed: 0 | Skipped: 0',
+  '  Duration: 7.1s',
   '',
   '  Report: .twd/report/index.html',
 ]

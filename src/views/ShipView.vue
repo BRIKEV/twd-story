@@ -118,9 +118,12 @@ const skills = [
         </a>
       </li>
       <li>
-        <a :href="links.recordedPrs" target="_blank" rel="noopener">
-          <strong>Recorded pull requests ↗</strong>
-          <span>PRs labelled <code>record</code> get a video of their new tests.</span>
+        <a :href="links.recordedPr" target="_blank" rel="noopener">
+          <strong>A recorded pull request ↗</strong>
+          <span
+            >Labelled <code>record</code>, so CI filmed the tests it added and commented the
+            video.</span
+          >
         </a>
       </li>
       <li>
