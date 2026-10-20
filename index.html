@@ -9,6 +9,30 @@
       content="A live tour of TWD: run real tests from the sidebar and watch them drive this page."
     />
     <title>TWD — tests that run in your browser</title>
+
+    <!-- Link previews (LinkedIn, Slack, X…): absolute URLs, crawlers don't resolve relative ones -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TWD" />
+    <meta property="og:url" content="https://try.twd.dev/" />
+    <meta property="og:title" content="TWD — run real tests in your browser" />
+    <meta
+      property="og:description"
+      content="A live, guided tour of Test While Developing. Every step is a test you run from the sidebar, and it drives the page you are reading."
+    />
+    <meta property="og:image" content="https://try.twd.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="The TWD tour: the test sidebar next to a page where a test just typed hello into a list and passed in 0.2 seconds."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TWD — run real tests in your browser" />
+    <meta
+      name="twitter:description"
+      content="A live, guided tour of Test While Developing. Every step is a test you run from the sidebar."
+    />
+    <meta name="twitter:image" content="https://try.twd.dev/og-image.png" />
   </head>
   <body>
     <div id="app"></div>
