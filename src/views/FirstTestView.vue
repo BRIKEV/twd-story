@@ -22,7 +22,7 @@ const steps = computed<TourStep[]>(() => [
     state: status.value === 'idle' ? 'active' : 'done',
   },
   {
-    text: 'Press ▶ next to it, then watch the app on the right, not the sidebar.',
+    text: 'Press ▶ next to it, then watch the app, not the sidebar.',
     state: passed.value ? 'done' : status.value === 'idle' ? 'todo' : 'active',
   },
 ])
@@ -44,8 +44,8 @@ const seconds = computed(() =>
       <p class="eyebrow">Chapter 1</p>
       <h1>Your first test</h1>
       <p class="lede">
-        On the right is a tiny app: a text field and a list. In the sidebar there's a test for it.
-        Run it, and the result shows up here in the app, not in a terminal.
+        Here is a tiny app: a text field and a list. In the sidebar there's a test for it. Run it,
+        and the result shows up here in the app, not in a terminal.
       </p>
     </header>
 

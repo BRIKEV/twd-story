@@ -14,8 +14,9 @@ export function startTwd() {
   )
 
   initTWD(tests, {
-    // Only ever started on a wide screen (see main.ts), so it can start open
-    open: true,
+    // Below this width the sidebar sits on top of the page instead of beside
+    // it, so a phone starts on the page and the tour points at the TWD button
+    open: window.matchMedia('(min-width: 1048px)').matches,
     position: 'left',
     pace: true,
     // Chapter 5 has the reader filter the sidebar down to the shop's tests

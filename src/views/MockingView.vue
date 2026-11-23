@@ -103,7 +103,7 @@ const tone = computed(() => {
           :unlocked="passedCount >= UNLOCK_AFTER"
           :tone="tone"
         >
-          <template v-if="running">Watch the app on the right…</template>
+          <template v-if="running">Watch the app…</template>
           <template v-else-if="failed">
             <strong>{{ failed.test }}</strong> failed. Click it in the sidebar to see the log.
           </template>

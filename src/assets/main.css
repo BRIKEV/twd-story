@@ -379,49 +379,6 @@ a.tour-arrow:hover {
   font-size: 15px;
 }
 
-/* Shown instead of the tour below 1024px (App.vue) */
-
-.desktop-only {
-  display: grid;
-  gap: 16px;
-  justify-items: start;
-  max-width: 560px;
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 64px 24px;
-  align-content: center;
-}
-
-.desktop-only h1 {
-  margin: 0;
-  font-size: clamp(32px, 8vw, 44px);
-}
-
-.desktop-only .eyebrow,
-.desktop-only .lede {
-  margin: 0;
-}
-
-.desktop-only .lede {
-  font-size: 18px;
-}
-
-.desktop-only-note {
-  margin: 0;
-  padding: 14px 16px;
-  border-radius: 10px;
-  background: var(--info-bg);
-  color: var(--ink-2);
-  font-size: 15px;
-}
-
-.desktop-only-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 8px;
-}
-
 .facts {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1529,10 +1486,14 @@ a.tour-arrow:hover {
 /* The pulse the tour puts on an element inside the TWD sidebar */
 
 [data-story-spotlight] {
-  position: relative;
-  z-index: 1;
   border-radius: 6px;
   animation: spotlight 1.4s ease-in-out infinite;
+}
+
+/* The closed sidebar's TWD button is fixed to the edge; leave its position alone */
+[data-story-spotlight]:not(.twd-sidebar-closed) {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes spotlight {

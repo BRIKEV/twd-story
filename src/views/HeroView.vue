@@ -7,9 +7,10 @@ import { RouterLink } from 'vue-router'
     <p class="eyebrow">Test While Developing</p>
     <h1>Your tests run<br />in this tab.</h1>
     <p class="lede">
-      The panel on the left isn't a screenshot. It's <strong>TWD</strong>, an in-browser test
-      runner, loaded into this site with real tests for this site. Press ▶ and a test drives the
-      page you're reading. It works in any browser you open.
+      The panel on the left isn't a screenshot (on a phone, tap the <strong>TWD</strong> tab to open
+      it). It's <strong>TWD</strong>, an in-browser test runner, loaded into this site with real
+      tests for this site. Press ▶ and a test drives the page you're reading. It works in any
+      browser you open, phones included.
     </p>
     <div class="hero-actions">
       <RouterLink to="/first-test" class="button primary large">Start the tour →</RouterLink>

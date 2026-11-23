@@ -3,7 +3,8 @@ import { onUnmounted, toValue, watchEffect, type MaybeRefOrGetter } from 'vue'
 const ATTRIBUTE = 'data-story-spotlight'
 
 /**
- * Pulses an element inside the TWD sidebar to show the reader where to click.
+ * Pulses an element inside the TWD sidebar to show the reader where to click,
+ * or the TWD button that opens it while the sidebar is closed.
  *
  * The selector is re-applied on an interval because the sidebar renders after
  * the page and re-renders on its own schedule. A data attribute is used rather
@@ -22,7 +23,11 @@ export function useSpotlight(selector: MaybeRefOrGetter<string | null>) {
     const current = toValue(selector)
     if (!current) return
     const apply = () => {
-      const target = document.querySelector(`#twd-sidebar-root ${current}`)
+      // A closed sidebar (where it starts on a phone) has nothing to point at
+      // but the button that opens it
+      const target =
+        document.querySelector(`#twd-sidebar-root ${current}`) ??
+        document.querySelector('#twd-sidebar-root .twd-sidebar-closed')
       if (target && !target.hasAttribute(ATTRIBUTE)) {
         clear()
         target.setAttribute(ATTRIBUTE, '')
