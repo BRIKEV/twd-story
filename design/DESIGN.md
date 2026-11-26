@@ -1,6 +1,6 @@
 # twd-story design guide
 
-For building HTML prototypes (Tailwind + Alpine.js) that look and behave like this site.
+For building HTML prototypes (Tailwind + Vue) that look and behave like this site.
 Source of truth: `src/assets/main.css` (every style lives there), `src/components/`, `src/views/`.
 
 ## 1. Product
